@@ -3,7 +3,7 @@ import type { App, Plugin } from 'vue';
 
 // 导出组件 - 支持按需引入
 export { default as BizMessage } from './BizMessage/index.vue';
-export { default as BizMainForm } from './BizMainForm/index.vue';
+// export { default as BizMainForm } from './BizMainForm/index.vue';
 // export { default as BizArea } from './BizArea/index.vue';
 export { default as BaseTable } from './baseTable/index.vue';
 export { default as BizSvgIcon } from './BizSvgIcon/index.vue';
@@ -16,7 +16,7 @@ export * from './baseTable/type';
 
 // 导入所有组件
 import BizMessage from './BizMessage/index.vue';
-import BizMainForm from './BizMainForm/index.vue';
+// import BizMainForm from './BizMainForm/index.vue';
 // import BizArea from './BizArea/index.vue';
 import BaseTable from './baseTable/index.vue';
 import BizSvgIcon from './BizSvgIcon/index.vue';
@@ -25,7 +25,7 @@ import DesignForm from './DesignFrom/index.vue';
 // 组件列表
 const components = [
   BizMessage,
-  BizMainForm,
+  // BizMainForm,
   // BizArea,
   BaseTable,
   BizSvgIcon,

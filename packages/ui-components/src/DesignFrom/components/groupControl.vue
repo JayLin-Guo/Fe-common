@@ -180,7 +180,7 @@ const handleItemClone = (item, index) => {
   }
 }
 
-.button-control {
+/* .button-control {
   padding: 8px 16px;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
@@ -215,7 +215,7 @@ const handleItemClone = (item, index) => {
     opacity: 0.6;
     cursor: not-allowed;
   }
-}
+} */
 
 .title-control {
   margin: 0;

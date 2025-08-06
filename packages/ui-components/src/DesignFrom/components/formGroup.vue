@@ -314,7 +314,6 @@ const handleDragOver = evt => {
  * 设计拖拽事件 - 优化为默认添加到最后
  */
 const draggableAdd = evt => {
-  console.log('draggableAdd', evt);
   isDragOver.value = false;
   dragCounter.value = 0;
 
@@ -440,36 +439,21 @@ onUnmounted(() => {
     dragDebounceTimer = null;
   }
   lastDragPosition = null;
-  console.log('formGroup组件卸载');
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../styles/theme.scss';
+
 .form-item-wrapper {
-  position: relative;
-  border: 1px solid transparent;
-  margin-bottom: 8px;
-
-  &.active {
-    border-color: #ff6700;
-    background-color: rgba(255, 103, 0, 0.02);
-    box-shadow: 0 0 0 1px #ff6700;
-  }
-
-  /* 只有在非拖拽状态下才显示hover效果 */
-  &:hover:not(.sortable-drag) {
-    border: 1px solid #ff6700;
-    background-color: rgba(249, 250, 251, 0.8);
-  }
+  @include form-item-wrapper;
 }
 
 /* 拖拽控制 - 左上角 */
 .drag-control-move {
-  position: absolute;
+  @include drag-control-base;
   left: -1px;
   top: -1px;
-  z-index: 10;
-  display: none;
 
   .form-item-wrapper:hover &,
   .form-item-wrapper.active & {
@@ -478,28 +462,18 @@ onUnmounted(() => {
 }
 
 .drag-move {
-  cursor: move;
-  background: #ff6700;
-  padding: 6px 8px;
-  font-size: 14px;
-  color: #fff;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include drag-move-button;
 
   .el-icon {
-    font-size: 14px;
+    font-size: $font-size-md;
   }
 }
 
 /* 操作控制 - 右下角 */
 .drag-control-actions {
-  position: absolute;
+  @include drag-control-base;
   right: -1px;
   bottom: -1px;
-  z-index: 10;
-  display: none;
 
   .form-item-wrapper:hover &,
   .form-item-wrapper.active & {
@@ -509,211 +483,29 @@ onUnmounted(() => {
 }
 
 .item-control {
-  display: flex;
-  gap: 0;
-  background: #ff6700;
-  border: 1px solid #ff6700;
-  border-radius: 6px 0 0 0;
-  padding: 0;
-  box-shadow: 0 2px 8px rgba(255, 103, 0, 0.2);
-  overflow: hidden;
+  @include action-button-group;
 
   span {
-    cursor: pointer;
-    padding: 6px 8px;
-    border-radius: 0;
-    font-size: 14px;
-    color: white;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 14px;
-    height: 14px;
-    background: #ff6700;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-
-    &:last-child {
-      border-right: none;
-    }
-
-    &:hover {
-      background-color: #e55a00;
-      color: white;
-    }
-
-    /* 删除按钮特殊样式 */
-    &[title='删除']:hover {
-      background-color: #dc2626;
-    }
-
-    /* 克隆按钮保持橙色 */
-    &[title='克隆']:hover {
-      background-color: #e55a00;
-    }
-
-    /* 添加列按钮保持橙色 */
-    &[title='添加列']:hover {
-      background-color: #e55a00;
-    }
+    @include action-button;
 
     .el-icon {
-      font-size: 12px;
+      font-size: $font-size-sm;
     }
   }
 }
 
 .drag {
-  height: 100%;
-  min-height: 400px;
-  width: 100%;
-  position: relative;
-  padding: 16px;
-  border: 2px dashed transparent;
-  border-radius: 8px;
-  /* 移除transition避免与拖拽动画冲突 */
-
-  /* 空状态时显示虚线边框 */
-  &:empty {
-    border-color: #e5e7eb;
-    border-style: dashed;
-    background: linear-gradient(
-      45deg,
-      transparent 25%,
-      rgba(249, 250, 251, 0.5) 25%,
-      rgba(249, 250, 251, 0.5) 50%,
-      transparent 50%,
-      transparent 75%,
-      rgba(249, 250, 251, 0.5) 75%
-    );
-    background-size: 20px 20px;
-  }
-
-  /* 拖拽悬停时的样式 */
-  &.drag-over {
-    height: auto;
-    border-color: #ff6700;
-    background-color: rgba(255, 103, 0, 0.02);
-
-    &::before {
-      background: rgba(255, 103, 0, 0.05);
-      border-color: #ff6700;
-      color: #ff6700;
-    }
-  }
-
-  &.ghost {
-    opacity: 0.4;
-    transform: rotate(2deg);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  }
-
-  /* 拖拽开始时禁用所有transition */
-  .sortable-drag * {
-    transition: none !important;
-  }
-
-  /* 拖拽过程中的样式优化 */
-  .sortable-chosen {
-    transform: scale(1.02);
-  }
-
-  .sortable-fallback {
-    background: rgba(255, 103, 0, 0.1);
-    border: 2px solid #ff6700;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(255, 103, 0, 0.3);
-  }
-
-  /* 有内容时减少内边距 */
-  &:not(:empty) {
-    padding: 12px;
-    min-height: 200px;
-  }
+  @include drag-area-base;
+  @include drag-states;
 }
 
-/* 栅格内部的拖拽区域 - 减少高度和内边距 */
+/* 栅格内部的拖拽区域 */
 .drag-grid-nested {
-  min-height: 35px !important;
-  padding: 8px !important;
+  @include drag-area-nested;
 
-  /* 空状态时的样式优化 */
-  &:empty::before {
-    content: '拖拽组件到此处';
-    font-size: 12px;
-    padding: 16px;
-    background: #fafbfc;
-    border: 1px dashed #e2e8f0;
-    border-radius: 4px;
-  }
-
-  /* 空状态时更简洁的背景 */
-  &:empty {
-    background: transparent;
-    border-color: #f1f5f9;
-  }
-
-  /* 有内容时进一步减少高度 */
   &:not(:empty) {
     padding: 6px !important;
     min-height: 40px !important;
-  }
-
-  /* 拖拽悬停时的样式 */
-  &.drag-over {
-    border-color: #ff6700;
-    background-color: rgba(255, 103, 0, 0.01);
-
-    &::before {
-      background: rgba(255, 103, 0, 0.03);
-      border-color: #ff6700;
-      color: #ff6700;
-    }
-  }
-}
-
-/* 拖拽ghost样式 - 减少抖动 */
-.ghost {
-  opacity: 0.6;
-  background-color: rgba(255, 103, 0, 0.1);
-  border: 2px dashed #ff6700;
-  transform: rotate(1deg);
-  transition: none !important; /* 避免动画导致的抖动 */
-}
-
-/* 拖拽相关的额外样式 */
-.sortable-drag {
-  opacity: 0.8;
-  transform: scale(1.01);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  z-index: 9999;
-  transition: none !important; /* 避免过渡动画 */
-}
-
-.sortable-chosen {
-  opacity: 0.9;
-  transition: none !important;
-}
-
-.sortable-fallback {
-  opacity: 0.7;
-  background: rgba(255, 103, 0, 0.08);
-  border: 1px solid #ff6700;
-  transition: none !important;
-}
-
-/* 拖拽容器样式优化 */
-.drag:not(.drag-grid-nested) {
-  /* 为主拖拽区域添加平滑的边界处理 */
-  border-radius: 8px;
-  /* overflow: hidden; */
-}
-
-/* 减少嵌套拖拽的视觉干扰 */
-.drag-grid-nested {
-  .sortable-drag {
-    transform: scale(0.98);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 }
 </style>

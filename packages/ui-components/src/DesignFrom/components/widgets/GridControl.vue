@@ -170,7 +170,7 @@ const handleClick = () => {
 // 处理列点击事件
 const handleColumnClick = (col, colIndex) => {
   if (props.designMode) {
-    console.log('Column clicked:', colIndex, col);
+    // 列点击逻辑
   }
 };
 
@@ -188,25 +188,13 @@ const handleNestedItemClone = (item, index) => {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../../styles/theme.scss';
 .grid-widget {
+  @include form-item-wrapper;
   width: 100%;
-  margin: 4px 0;
-  border: 1px solid #e2e8f0;
-  border-radius: 4px;
+  margin: $spacing-xs 0;
   overflow: hidden;
-  background: #ffffff;
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: #cbd5e1;
-  }
-
-  /* 设计模式下的选中状态会由父组件的.active类控制 */
-  .form-item-wrapper.active & {
-    border-color: #ff6700;
-    box-shadow: 0 0 0 1px #ff6700;
-  }
 }
 
 .grid-container {
@@ -219,7 +207,7 @@ const handleNestedItemClone = (item, index) => {
 }
 
 .form-col {
-  border-right: 1px solid #f1f5f9;
+  border-right: 1px solid $gray-100;
   min-height: 40px;
 
   &:last-child {
@@ -228,7 +216,7 @@ const handleNestedItemClone = (item, index) => {
 }
 
 .col-content {
-  padding: 8px;
+  padding: $spacing-sm;
   min-height: 40px;
   position: relative;
 }
@@ -236,10 +224,10 @@ const handleNestedItemClone = (item, index) => {
 .col-header {
   position: absolute;
   top: 2px;
-  right: 4px;
+  right: $spacing-xs;
   z-index: 5;
   opacity: 0.7;
-  transition: opacity 0.2s ease;
+  transition: opacity $transition-normal;
 }
 
 .grid-widget:hover .col-header {
@@ -247,11 +235,11 @@ const handleNestedItemClone = (item, index) => {
 }
 
 .col-label {
-  background: rgba(148, 163, 184, 0.1);
-  color: #94a3b8;
-  font-size: 9px;
-  padding: 1px 4px;
-  border-radius: 2px;
+  background: rgba($gray-400, 0.1);
+  color: $gray-400;
+  font-size: $font-size-xs;
+  padding: 1px $spacing-xs;
+  border-radius: $border-radius-sm;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
@@ -261,20 +249,20 @@ const handleNestedItemClone = (item, index) => {
   align-items: center;
   justify-content: center;
   min-height: 40px;
-  border: 1px dashed #e2e8f0;
-  border-radius: 3px;
-  background: #fafbfc;
-  transition: all 0.2s ease;
-  margin: 4px 0;
+  border: 1px dashed $gray-200;
+  border-radius: $border-radius-sm;
+  background: $gray-50;
+  transition: all $transition-normal;
+  margin: $spacing-xs 0;
 
   &:hover {
-    border-color: #ff6700;
-    background: rgba(255, 103, 0, 0.02);
+    border-color: $primary-color;
+    background: $primary-ultra-light;
   }
 
   .empty-hint {
-    color: #cbd5e1;
-    font-size: 11px;
+    color: $gray-300;
+    font-size: $font-size-xs;
     text-align: center;
     font-weight: 400;
   }
@@ -282,29 +270,29 @@ const handleNestedItemClone = (item, index) => {
 
 .grid-actions {
   display: flex;
-  gap: 6px;
-  padding: 8px 12px;
-  background: #fafbfc;
-  border-top: 1px solid #f1f5f9;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: $gray-50;
+  border-top: 1px solid $gray-100;
   justify-content: center;
 }
 
 .action-btn {
   display: flex;
   align-items: center;
-  gap: 3px;
-  padding: 4px 8px;
-  border: 1px solid #e2e8f0;
-  border-radius: 3px;
-  background: white;
-  color: #64748b;
-  font-size: 11px;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border: 1px solid $gray-200;
+  border-radius: $border-radius-sm;
+  background: $white;
+  color: $gray-600;
+  font-size: $font-size-xs;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all $transition-normal;
 
   &:hover {
-    border-color: #cbd5e1;
-    background: #f8fafc;
+    border-color: $gray-300;
+    background: $gray-50;
   }
 
   &:disabled {
@@ -312,8 +300,8 @@ const handleNestedItemClone = (item, index) => {
     cursor: not-allowed;
 
     &:hover {
-      border-color: #e2e8f0;
-      background: white;
+      border-color: $gray-200;
+      background: $white;
     }
   }
 
@@ -324,43 +312,17 @@ const handleNestedItemClone = (item, index) => {
 
 .add-btn {
   &:hover {
-    border-color: #ff6700;
-    color: #ff6700;
-    background: rgba(255, 103, 0, 0.03);
+    border-color: $primary-color;
+    color: $primary-color;
+    background: $primary-ultra-light;
   }
 }
 
 .remove-btn {
   &:hover:not(:disabled) {
-    border-color: #ef4444;
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.03);
-  }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .form-col {
-    border-right: none;
-    border-bottom: 1px solid #f3f4f6;
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .col-content {
-    padding: 8px;
-    min-height: 60px;
-  }
-
-  .grid-actions {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .action-btn {
-    justify-content: center;
+    border-color: $danger-color;
+    color: $danger-color;
+    background: rgba($danger-color, 0.03);
   }
 }
 </style>

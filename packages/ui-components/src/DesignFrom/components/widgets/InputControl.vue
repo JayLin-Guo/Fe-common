@@ -74,56 +74,68 @@ const handleFocus = event => {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../../styles/theme.scss';
+
 .input-widget {
-  padding: 4px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  padding: $spacing-xs;
+  border-radius: $border-radius-sm;
+  transition: all $transition-normal;
+
+  /* 设计模式样式 */
+  &:hover {
+    background-color: $primary-ultra-light;
+    cursor: pointer;
+  }
 }
 
 .form-control {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: $spacing-sm;
   width: 100%;
 }
 
 .control-label {
   min-width: 80px;
   font-weight: 500;
-  color: #606266;
+  color: $gray-600;
   text-align: right;
   flex-shrink: 0;
 }
 
 .input-control {
   flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $gray-300;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-md;
   outline: none;
-  transition: border-color 0.2s ease;
-}
+  transition: border-color $transition-normal;
+  background: $white;
 
-.input-control:focus {
-  border-color: #409eff;
-}
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 1px $primary-color;
+  }
 
-.input-control:disabled {
-  background-color: #f5f7fa;
-  color: #c0c4cc;
-  cursor: not-allowed;
-}
+  &:hover {
+    border-color: $gray-400;
+  }
 
-.input-control[readonly] {
-  background-color: #f9f9f9;
-  cursor: default;
-}
+  &:disabled {
+    background-color: $gray-100;
+    color: $gray-400;
+    cursor: not-allowed;
+  }
 
-/* 设计模式样式 */
-.input-widget:hover {
-  background-color: rgba(0, 0, 0, 0.02);
-  cursor: pointer;
+  &[readonly] {
+    background-color: $gray-50;
+    cursor: default;
+  }
+
+  &::placeholder {
+    color: $gray-400;
+  }
 }
 </style>

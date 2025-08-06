@@ -1,0 +1,48 @@
+// ================================
+// 主题定制示例 - Theme Customization Example
+// ================================
+
+// 在导入主题之前定义自定义变量，这样可以覆盖默认值
+
+// --------------------------------
+// 自定义主题色彩示例
+// --------------------------------
+
+// 蓝色主题
+// $primary-color: #3b82f6;
+// $primary-dark: #2563eb;
+
+// 绿色主题
+// $primary-color: #10b981;
+// $primary-dark: #059669;
+
+// 紫色主题
+// $primary-color: #8b5cf6;
+// $primary-dark: #7c3aed;
+
+// --------------------------------
+// 自定义尺寸变量示例
+// --------------------------------
+
+// $border-radius: 8px;
+// $spacing-md: 18px;
+// $font-size-md: 15px;
+
+// 导入主题系统
+@import './theme.scss';
+
+// --------------------------------
+// 使用示例
+// --------------------------------
+
+/*
+// 在Vue组件中使用：
+<style lang="scss" scoped>
+$primary-color: #3b82f6;  // 自定义主题色
+@import './styles/theme.scss';
+
+.my-component {
+  @include form-item-wrapper;
+}
+</style>
+*/

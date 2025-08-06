@@ -67,15 +67,13 @@ const btnClick = type => {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../styles/theme.scss';
+
 .main-tools {
-  display: flex;
-  align-items: center;
+  @include toolbar-base;
   justify-content: flex-end;
-  gap: 8px;
-  padding: 4px 0px;
-  background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
+  padding: $spacing-xs 0;
   min-height: 40px;
   margin-right: 2px;
 }
@@ -83,23 +81,23 @@ const btnClick = type => {
 .tool-btn {
   display: flex;
   align-items: center;
-  padding: 0px 8px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-
+  padding: 0 $spacing-sm;
+  background: $white;
+  border: 1px solid $gray-200;
+  border-radius: $border-radius;
   cursor: pointer;
-  font-size: 13px;
+  font-size: $font-size-sm;
   font-weight: 500;
-  color: #374151;
-  transition: all 0.2s ease;
+  color: $gray-700;
+  transition: all $transition-normal;
   user-select: none;
   height: 32px;
 
   &:hover {
-    background: #f9fafb;
-    border-color: #d1d5db;
+    background: $gray-50;
+    border-color: $gray-300;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: $shadow;
   }
 
   &:active {
@@ -107,8 +105,8 @@ const btnClick = type => {
   }
 
   .icon {
-    font-size: 14px;
-    margin-right: 4px;
+    font-size: $font-size-md;
+    margin-right: $spacing-xs;
     display: flex;
     align-items: center;
     width: 14px;
@@ -120,98 +118,36 @@ const btnClick = type => {
 .tool-btn:nth-child(4),
 .tool-btn:nth-child(5) {
   &:hover {
-    border-color: #ff6700;
-    background: rgba(255, 103, 0, 0.05);
-    color: #ff6700;
+    border-color: $primary-color;
+    background: $primary-lighter;
+    color: $primary-color;
   }
 }
 
 /* 预览按钮 - 蓝色主题 */
 .tool-btn:nth-child(2) {
   &:hover {
-    border-color: #3b82f6;
-    background: rgba(59, 130, 246, 0.05);
-    color: #3b82f6;
+    border-color: $info-color;
+    background: rgba($info-color, 0.05);
+    color: $info-color;
   }
 }
 
 /* 清空按钮 - 红色主题 */
 .tool-btn:nth-child(1) {
   &:hover {
-    border-color: #dc2626;
-    background: rgba(220, 38, 38, 0.05);
-    color: #dc2626;
+    border-color: $danger-color;
+    background: rgba($danger-color, 0.05);
+    color: $danger-color;
   }
 }
 
 /* 导入按钮 - 绿色主题 */
 .tool-btn:nth-child(3) {
   &:hover {
-    border-color: #16a34a;
-    background: rgba(22, 163, 74, 0.05);
-    color: #16a34a;
-  }
-}
-
-/* 特殊按钮样式 */
-.tool-btn[data-type='primary'] {
-  background: #ff6700;
-  border-color: #ff6700;
-  color: white;
-
-  &:hover {
-    background: #e55a00;
-    border-color: #e55a00;
-    color: white;
-    transform: translateY(-1px);
-  }
-}
-
-.tool-btn[data-type='danger'] {
-  background: #dc2626;
-  border-color: #dc2626;
-  color: white;
-
-  &:hover {
-    background: #b91c1c;
-    border-color: #b91c1c;
-    color: white;
-    transform: translateY(-1px);
-  }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .main-tools {
-    padding: 12px 16px;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .tool-btn {
-    padding: 6px 12px;
-    font-size: 13px;
-
-    .icon {
-      font-size: 14px;
-      margin-right: 4px;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .tool-btn {
-    padding: 6px 8px;
-    min-width: 40px;
-    justify-content: center;
-
-    span:not(.icon) {
-      display: none;
-    }
-
-    .icon {
-      margin-right: 0;
-    }
+    border-color: $success-color;
+    background: rgba($success-color, 0.05);
+    color: $success-color;
   }
 }
 </style>

@@ -1,0 +1,394 @@
+// ================================
+// 设计器主题系统 - Design Theme System
+// ================================
+
+// --------------------------------
+// 主题色彩变量 - Theme Colors
+// --------------------------------
+$primary-color: #ff6700 !default;
+$primary-light: rgba(255, 103, 0, 0.1) !default;
+$primary-lighter: rgba(255, 103, 0, 0.05) !default;
+$primary-ultra-light: rgba(255, 103, 0, 0.02) !default;
+$primary-dark: #e55a00 !default;
+$primary-darker: #cc5200 !default;
+
+$success-color: #10b981 !default;
+$warning-color: #f59e0b !default;
+$danger-color: #dc2626 !default;
+$info-color: #3b82f6 !default;
+
+// 中性色彩
+$white: #ffffff !default;
+$gray-50: #f9fafb !default;
+$gray-100: #f3f4f6 !default;
+$gray-200: #e5e7eb !default;
+$gray-300: #d1d5db !default;
+$gray-400: #9ca3af !default;
+$gray-500: #6b7280 !default;
+$gray-600: #4b5563 !default;
+$gray-700: #374151 !default;
+$gray-800: #1f2937 !default;
+$gray-900: #111827 !default;
+
+// --------------------------------
+// 尺寸变量 - Size Variables
+// --------------------------------
+$border-radius-sm: 4px !default;
+$border-radius: 6px !default;
+$border-radius-md: 8px !default;
+$border-radius-lg: 12px !default;
+
+$spacing-xs: 4px !default;
+$spacing-sm: 8px !default;
+$spacing-md: 12px !default;
+$spacing-lg: 16px !default;
+$spacing-xl: 20px !default;
+$spacing-xxl: 24px !default;
+
+$font-size-xs: 10px !default;
+$font-size-sm: 12px !default;
+$font-size-md: 14px !default;
+$font-size-lg: 16px !default;
+$font-size-xl: 18px !default;
+
+// --------------------------------
+// 动画变量 - Animation Variables
+// --------------------------------
+$transition-fast: 0.15s ease !default;
+$transition-normal: 0.2s ease !default;
+$transition-slow: 0.3s ease !default;
+
+$animation-duration: 200ms !default;
+$drag-animation: 200ms !default;
+
+// --------------------------------
+// 阴影变量 - Shadow Variables
+// --------------------------------
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05) !default;
+$shadow:
+  0 1px 3px rgba(0, 0, 0, 0.1),
+  0 1px 2px rgba(0, 0, 0, 0.06) !default;
+$shadow-md:
+  0 4px 6px rgba(0, 0, 0, 0.07),
+  0 2px 4px rgba(0, 0, 0, 0.06) !default;
+$shadow-lg:
+  0 10px 15px rgba(0, 0, 0, 0.1),
+  0 4px 6px rgba(0, 0, 0, 0.05) !default;
+$shadow-xl:
+  0 20px 25px rgba(0, 0, 0, 0.1),
+  0 8px 10px rgba(0, 0, 0, 0.04) !default;
+
+// 特殊阴影
+$shadow-primary: 0 2px 8px rgba(255, 103, 0, 0.2) !default;
+$shadow-primary-lg: 0 4px 12px rgba(255, 103, 0, 0.3) !default;
+$shadow-drag: 0 8px 24px rgba(0, 0, 0, 0.15) !default;
+
+// --------------------------------
+// Mixins - 通用样式混入
+// --------------------------------
+
+// 基础组件样式
+@mixin widget-base {
+  position: relative;
+  border-radius: $border-radius-md;
+  transition: all $transition-normal;
+  border: 1px solid transparent;
+  margin-bottom: $spacing-sm;
+  background: $white;
+
+  // 防止拖拽时的样式干扰
+  &.sortable-drag,
+  &.sortable-chosen,
+  &.sortable-fallback {
+    transition: none !important;
+  }
+}
+
+// Hover效果
+@mixin widget-hover {
+  &:hover:not(.sortable-drag) {
+    border-color: $primary-color;
+    background-color: $gray-50;
+    box-shadow: $shadow-sm;
+  }
+}
+
+// 激活状态
+@mixin widget-active {
+  &.active {
+    border-color: $primary-color;
+    background-color: $primary-ultra-light;
+    box-shadow: 0 0 0 1px $primary-color;
+  }
+}
+
+// 完整的组件容器样式
+@mixin form-item-wrapper {
+  @include widget-base;
+  @include widget-hover;
+  @include widget-active;
+}
+
+// 拖拽控制按钮基础样式
+@mixin drag-control-base {
+  position: absolute;
+  z-index: 10;
+  display: none;
+
+  .form-item-wrapper:hover &,
+  .form-item-wrapper.active & {
+    display: block;
+  }
+}
+
+// 拖拽移动按钮样式
+@mixin drag-move-button {
+  cursor: move;
+  background: $primary-color;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-md;
+  color: $white;
+  transition: all $transition-normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+// 操作按钮组样式
+@mixin action-button-group {
+  display: flex;
+  gap: 0;
+  background: $primary-color;
+  border: 1px solid $primary-color;
+  border-radius: $border-radius 0 0 0;
+  padding: 0;
+  box-shadow: $shadow-primary;
+  overflow: hidden;
+}
+
+// 单个操作按钮样式
+@mixin action-button {
+  cursor: pointer;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: 0;
+  font-size: $font-size-md;
+  color: $white;
+  transition: all $transition-normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 14px;
+  height: 14px;
+  background: $primary-color;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:hover {
+    background-color: $primary-dark;
+    color: $white;
+  }
+
+  // 删除按钮特殊样式
+  &[title='删除']:hover {
+    background-color: $danger-color;
+  }
+
+  // 克隆和添加列按钮保持橙色
+  &[title='克隆']:hover,
+  &[title='添加列']:hover {
+    background-color: $primary-dark;
+  }
+}
+
+// 拖拽区域基础样式
+@mixin drag-area-base {
+  height: 100%;
+  min-height: 400px;
+  width: 100%;
+  position: relative;
+  padding: $spacing-lg;
+  border: 2px dashed transparent;
+  border-radius: $border-radius-md;
+
+  // 空状态样式
+  &:empty {
+    border-color: $gray-200;
+    border-style: dashed;
+    background: linear-gradient(
+      45deg,
+      transparent 25%,
+      rgba($gray-50, 0.5) 25%,
+      rgba($gray-50, 0.5) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba($gray-50, 0.5) 75%
+    );
+    background-size: 20px 20px;
+  }
+
+  // 拖拽悬停样式
+  &.drag-over {
+    height: auto;
+    border-color: $primary-color;
+    background-color: $primary-ultra-light;
+
+    &::before {
+      background: $primary-lighter;
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+  }
+
+  // 有内容时的样式调整
+  &:not(:empty) {
+    padding: $spacing-md;
+    min-height: 200px;
+  }
+}
+
+// 拖拽状态样式
+@mixin drag-states {
+  &.ghost {
+    opacity: 0.4;
+    transform: rotate(2deg);
+    box-shadow: $shadow-drag;
+  }
+
+  .sortable-drag * {
+    transition: none !important;
+  }
+
+  .sortable-chosen {
+    transform: scale(1.02);
+  }
+
+  .sortable-fallback {
+    background: $primary-light;
+    border: 2px solid $primary-color;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-primary-lg;
+  }
+}
+
+// 栅格嵌套拖拽区域样式
+@mixin drag-area-nested {
+  min-height: 35px !important;
+  padding: $spacing-sm !important;
+
+  &:empty::before {
+    content: '拖拽组件到此处';
+    font-size: $font-size-sm;
+    padding: $spacing-lg;
+    background: $gray-50;
+    border: 1px dashed $gray-300;
+    border-radius: $border-radius-sm;
+    color: $gray-500;
+    text-align: center;
+    display: block;
+  }
+
+  &:empty {
+    background: none;
+    border: 1px dashed $gray-300;
+  }
+}
+
+// 表单控件基础样式
+@mixin form-control-base {
+  width: 100%;
+  padding: $spacing-sm;
+  border: 1px solid $gray-300;
+  border-radius: $border-radius;
+  font-size: $font-size-md;
+  transition: all $transition-normal;
+  background: $white;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 1px $primary-color;
+  }
+
+  &:hover {
+    border-color: $gray-400;
+  }
+
+  &::placeholder {
+    color: $gray-400;
+  }
+}
+
+// 按钮基础样式
+@mixin button-base($bg-color: $primary-color, $hover-color: $primary-dark) {
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $bg-color;
+  border-radius: $border-radius;
+  background: $bg-color;
+  color: $white;
+  font-size: $font-size-md;
+  cursor: pointer;
+  transition: all $transition-normal;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+
+  &:hover {
+    background: $hover-color;
+    border-color: $hover-color;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: $bg-color;
+      border-color: $bg-color;
+    }
+  }
+}
+
+// 工具栏样式
+@mixin toolbar-base {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  background: $white;
+  border-bottom: 1px solid $gray-200;
+  min-height: 48px;
+}
+
+// 面板样式
+@mixin panel-base {
+  background: $white;
+  border: 1px solid $gray-200;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+}
+
+// 导出主题变量供外部使用
+:export {
+  primaryColor: $primary-color;
+  primaryLight: $primary-light;
+  primaryDark: $primary-dark;
+  dangerColor: $danger-color;
+  successColor: $success-color;
+  warningColor: $warning-color;
+  infoColor: $info-color;
+  borderRadius: $border-radius;
+  borderRadiusMd: $border-radius-md;
+  spacingSm: $spacing-sm;
+  spacingMd: $spacing-md;
+  spacingLg: $spacing-lg;
+  transitionNormal: $transition-normal;
+}
