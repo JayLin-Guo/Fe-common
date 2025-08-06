@@ -7,6 +7,7 @@ interface SchemaItem {
   formItem?: any;
   config: any;
   columns?: any[];
+  options?: Array<{ label: string; value: any }>;
 }
 
 export interface SchemaJson {

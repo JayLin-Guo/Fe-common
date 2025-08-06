@@ -1,5 +1,10 @@
 // 控件工厂 - 解决 formGroup 和 groupControl 的循环依赖
 import { defineAsyncComponent, Component } from 'vue';
+import {
+  FormComponentType,
+  CONTAINER_COMPONENTS,
+  FORM_ITEM_COMPONENTS,
+} from '../types/componentTypes';
 
 // 控件类型映射
 export interface WidgetConfig {
@@ -29,8 +34,7 @@ export function hasWidget(type: string): boolean {
 
 // 检查是否为容器类型
 export function isContainerWidget(type: string): boolean {
-  const config = getWidgetConfig(type);
-  return config?.canNested || false;
+  return CONTAINER_COMPONENTS.includes(type as FormComponentType);
 }
 
 // 批量注册控件
@@ -40,42 +44,65 @@ export function registerWidgets(widgets: Record<string, WidgetConfig>) {
   });
 }
 
-// 默认控件注册 - 注册已实现的组件
+// 创建 Element Plus 组件配置的辅助函数
+const createElementPlusWidget = (
+  needFormItem: boolean = true
+): WidgetConfig => ({
+  component: defineAsyncComponent(
+    () => import('./widgets/ElementPlusWidget.vue')
+  ),
+  needFormItem,
+  canNested: false,
+});
+
+// 默认控件注册 - 使用枚举和辅助函数
 const defaultWidgets: Record<string, WidgetConfig> = {
-  // 基础控件
-  input: {
-    component: defineAsyncComponent(() => import('./widgets/InputControl.vue')),
-    needFormItem: true,
-    canNested: false,
-  },
+  // 基础控件 - 使用通用的 Element Plus 组件渲染器
+  [FormComponentType.INPUT]: createElementPlusWidget(true),
+  [FormComponentType.TEXTAREA]: createElementPlusWidget(true),
+  [FormComponentType.INPUT_NUMBER]: createElementPlusWidget(true),
+  [FormComponentType.SELECT]: createElementPlusWidget(true),
+  [FormComponentType.RADIO]: createElementPlusWidget(true),
+  [FormComponentType.CHECKBOX]: createElementPlusWidget(true),
+  [FormComponentType.SWITCH]: createElementPlusWidget(true),
+  [FormComponentType.CASCADER]: createElementPlusWidget(true),
+  [FormComponentType.TREE_SELECT]: createElementPlusWidget(true),
+  [FormComponentType.DATE_PICKER]: createElementPlusWidget(true),
+  [FormComponentType.TIME_PICKER]: createElementPlusWidget(true),
+  [FormComponentType.SLIDER]: createElementPlusWidget(true),
+  [FormComponentType.RATE]: createElementPlusWidget(true),
+  [FormComponentType.COLOR_PICKER]: createElementPlusWidget(true),
+  [FormComponentType.BUTTON]: createElementPlusWidget(false),
+  [FormComponentType.TEXT]: createElementPlusWidget(false),
+  [FormComponentType.TITLE]: createElementPlusWidget(false),
 
   // 容器控件
-  grid: {
+  [FormComponentType.GRID]: {
     component: defineAsyncComponent(() => import('./widgets/GridControl.vue')),
     needFormItem: false,
     canNested: true,
   },
-  div: {
+  [FormComponentType.DIV]: {
     component: defineAsyncComponent(() => import('./widgets/DivControl.vue')),
     needFormItem: false,
     canNested: true,
   },
-  card: {
+  [FormComponentType.CARD]: {
     component: defineAsyncComponent(() => import('./widgets/CardControl.vue')),
     needFormItem: false,
     canNested: true,
   },
-  tabs: {
+  [FormComponentType.TABS]: {
     component: defineAsyncComponent(() => import('./widgets/TabsControl.vue')),
     needFormItem: false,
     canNested: true,
   },
-  flex: {
+  [FormComponentType.FLEX]: {
     component: defineAsyncComponent(() => import('./widgets/FlexControl.vue')),
     needFormItem: false,
     canNested: true,
   },
-  divider: {
+  [FormComponentType.DIVIDER]: {
     component: defineAsyncComponent(
       () => import('./widgets/DividerControl.vue')
     ),

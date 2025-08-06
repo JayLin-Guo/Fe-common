@@ -118,7 +118,10 @@ const defaultComponentsConf: SchemaJson[] = [
         control: {
           modelValue: '',
         },
-
+        options: [
+          { label: '选项1', value: '1' },
+          { label: '选项2', value: '2' },
+        ],
         config: {},
       },
       {
@@ -129,6 +132,11 @@ const defaultComponentsConf: SchemaJson[] = [
         control: {
           modelValue: [],
         },
+        options: [
+          { label: '选项1', value: '1' },
+          { label: '选项2', value: '2' },
+          { label: '选项3', value: '3' },
+        ],
         config: {},
       },
       {
@@ -140,6 +148,11 @@ const defaultComponentsConf: SchemaJson[] = [
           modelValue: '',
           appendToBody: true,
         },
+        options: [
+          { label: '选项1', value: '1' },
+          { label: '选项2', value: '2' },
+          { label: '选项3', value: '3' },
+        ],
         config: {},
       },
       {
