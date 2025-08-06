@@ -13,6 +13,7 @@ import { SchemaJson } from './types/designForm';
 import DragControl from './components/dragControl.vue';
 import HeadTools from './components/headTools.vue';
 import FormControlAttr from './components/formControlAttr.vue';
+import BizJsonEditor from '../BizJsonEditor/index.vue';
 import Core from './FormCore.vue';
 import { getGroupName } from './utils.js';
 import {
@@ -52,6 +53,7 @@ const state = reactive({
   loading: false,
   formDataPreview: {},
   previewVisible: false,
+  jsonVisible: false,
   designType: 'default',
   formDict: {},
   formOtherData: {
@@ -81,6 +83,11 @@ const handleToolClick = (type: string) => {
       state.previewVisible = !state.previewVisible;
       break;
 
+    case 'json':
+      // 预览表单
+      state.jsonVisible = !state.jsonVisible;
+      break;
+
     case 'save':
       console.log(state, 'state===>>>>');
       // 保存表单
@@ -104,6 +111,15 @@ const handleToolClick = (type: string) => {
       break;
   }
 };
+
+const jsonData = ref('');
+watch(
+  () => state.formData,
+  (newVal: any) => {
+    jsonData.value = newVal;
+  },
+  { deep: true }
+);
 
 // 处理表单项点击（选中）
 const handleItemClick = (item: any, index: number) => {
@@ -195,6 +211,20 @@ onBeforeMount(() => {
         @update-element="handleUpdateElement"
       />
     </div>
+    <el-dialog v-model="state.jsonVisible" title="JSON" width="50%">
+      <div
+        class="json-container"
+        style="width: 100%; height: 500px; overflow-y: scroll"
+      >
+        <BizJsonEditor v-model="jsonData" />
+      </div>
+
+      <template #footer>
+        <el-button type="primary" @click="state.jsonVisible = false">
+          关闭
+        </el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 

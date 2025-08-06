@@ -84,7 +84,7 @@ import { Icon } from '@iconify/vue';
       font-size: 20px;
       font-weight: 600;
       color: #1e293b;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;

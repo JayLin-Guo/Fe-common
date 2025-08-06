@@ -1,24 +1,25 @@
 <template>
   <JsonEditorVue
+    style="width: 100%"
     ref="editorRef"
-    v-model:value="jsonString"
+    v-model="jsonString"
     lang="json"
     theme="dark"
+    Mode="code"
     :navigationBar="false"
     :statusBar="false"
     :mainMenuBar="false"
-    mode="code"
     @change="handleChange"
   />
 </template>
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, isRef, ref, watch } from 'vue';
 import JsonEditorVue from 'json-editor-vue';
 
 import { reactive } from 'vue';
 
 const props = defineProps({
-  value: {
+  modelValue: {
     type: String,
     default: '',
   },
@@ -33,14 +34,30 @@ const props = defineProps({
 });
 
 const editorRef = ref<any>(null);
+const jsonString = ref('');
+watch(
+  () => props.modelValue,
+  (newVal: any) => {
+    let jsonVal;
+    if (isRef(newVal)) {
+      jsonVal = newVal.value;
+    } else {
+      jsonVal = newVal;
+    }
 
-const jsonString = computed(() => {
-  try {
-    return JSON.stringify(JSON.parse(props.value), null, 2);
-  } catch (e) {
-    return props.value;
+    console.log(jsonVal, 'jsonVal');
+    if (!jsonVal) return;
+    if (typeof jsonVal === 'object' && jsonVal !== null) {
+      jsonString.value = jsonVal;
+    } else {
+      jsonString.value = JSON.parse(jsonVal);
+    }
+  },
+  {
+    deep: true,
+    immediate: true,
   }
-});
+);
 
 const handleChange = ({ text }: any) => {
   console.log(JSON.parse(text), '修改后的');

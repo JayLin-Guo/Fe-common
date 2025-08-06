@@ -56,6 +56,7 @@ import { Icon } from '@iconify/vue';
 import BizMessageDemo from '../demos/BizMessageDemo.vue';
 import BaseTableDemo from '../demos/BaseTableDemo.vue';
 import FormDesignerDemo from '../demos/FormDesignerDemo.vue';
+import BizJsonEditorDemo from '../demos/BizJsonEditorDemo.vue';
 
 const selectedComponent = ref(null);
 
@@ -85,6 +86,14 @@ const components = ref([
     status: 'beta',
     statusText: 'Beta',
   },
+  {
+    name: 'BizJsonEditor',
+    label: 'BizJsonEditor',
+    description: 'Json编辑器',
+    icon: 'mdi:json',
+    status: 'stable',
+    statusText: '稳定',
+  },
 ]);
 
 // 组件演示映射
@@ -92,6 +101,7 @@ const demoComponents = {
   BizMessage: BizMessageDemo,
   BaseTable: BaseTableDemo,
   FormDesigner: FormDesignerDemo,
+  BizJsonEditor: BizJsonEditorDemo,
 };
 
 const viewComponent = component => {
@@ -164,7 +174,7 @@ const getDemoComponent = componentName => {
   .card-icon {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
     border-radius: 8px;
     display: flex;
     align-items: center;

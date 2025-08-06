@@ -19,4 +19,6 @@ const designformSchema = ref();
 
 <style lang="scss" scoped>
 @use '../styles/demo.scss' as *;
+
+// 现在主题色已经在源码中使用变量，这里只需要简单的样式即可
 </style>
