@@ -1,20 +1,42 @@
 <template>
   <transition name="message-fade" @after-leave="handleAfterLeave">
-    <div v-if="visible" class="biz-message-container cui-new-message-box" :class="[`message-${type}`, { 'with-modal': modal }, customClass]" :id="id">
+    <div
+      v-if="visible"
+      class="biz-message-container cui-new-message-box"
+      :class="[`message-${type}`, { 'with-modal': modal }, customClass]"
+      :id="id"
+    >
       <div class="message-box">
         <div class="message-title">
           <span>{{ title }} </span>
-          <i v-if="showClose" class="message-close-icon" @click="handleCancel">×</i>
+          <i v-if="showClose" class="message-close-icon" @click="handleCancel"
+            >×</i
+          >
         </div>
 
         <div class="message-content">
-          <svg-icon :name="iconName" class="message-icon" :size="24" />
-          <div class="message-text" v-if="dangerouslyUseHTMLString" v-html="message"></div>
+          <Icon :icon="iconName" class="message-icon" width="24" height="24" />
+          <div
+            class="message-text"
+            v-if="dangerouslyUseHTMLString"
+            v-html="message"
+          ></div>
           <div class="message-text" v-else>{{ message }}</div>
         </div>
         <div class="message-buttons">
-          <button class="message-button cancel" v-if="showCancel" @click="handleCancel"> {{ cancelButtonText }}</button>
-          <el-button type="primary" class="message-button confirm" v-if="showConfirm" @click="handleConfirm">
+          <button
+            class="message-button cancel"
+            v-if="showCancel"
+            @click="handleCancel"
+          >
+            {{ cancelButtonText }}
+          </button>
+          <el-button
+            type="primary"
+            class="message-button confirm"
+            v-if="showConfirm"
+            @click="handleConfirm"
+          >
             {{ confirmButtonText }}
           </el-button>
         </div>
@@ -25,31 +47,38 @@
 
 <script lang="ts" setup>
 defineOptions({
-  name: 'BizMessage'
-})
-import { ref, computed, onMounted } from 'vue'
-import type { MessageType } from './type'
-import SvgIcon from '../BizSvgIcon/index.vue'
-import { iconMap } from '../BizSvgIcon/svgLoader'
+  name: 'BizMessage',
+});
+import { ref, computed, onMounted } from 'vue';
+import type { MessageType } from './type';
+import { Icon } from '@iconify/vue';
+
+// Iconify 图标映射
+const iconMap: Record<MessageType, string> = {
+  success: 'mdi:check-circle',
+  error: 'mdi:alert-circle',
+  warning: 'mdi:alert',
+  info: 'mdi:information',
+};
 
 const props = withDefaults(
   defineProps<{
-    type: MessageType
-    title: string
-    message: string | HTMLElement
-    duration: number
-    showClose: boolean
-    modal: boolean
-    confirmButtonText: string
-    cancelButtonText: string
-    showCancel: boolean
-    showConfirm: boolean
-    customClass: string
-    onConfirm?: () => void
-    onCancel?: () => void
-    onClosed?: () => void
-    dangerouslyUseHTMLString: boolean
-    id?: string
+    type: MessageType;
+    title: string;
+    message: string | HTMLElement;
+    duration: number;
+    showClose: boolean;
+    modal: boolean;
+    confirmButtonText: string;
+    cancelButtonText: string;
+    showCancel: boolean;
+    showConfirm: boolean;
+    customClass: string;
+    onConfirm?: () => void;
+    onCancel?: () => void;
+    onClosed?: () => void;
+    dangerouslyUseHTMLString: boolean;
+    id?: string;
   }>(),
   {
     type: 'info',
@@ -63,62 +92,62 @@ const props = withDefaults(
     showCancel: false,
     showConfirm: true,
     dangerouslyUseHTMLString: false,
-    id: ''
+    id: '',
   }
-)
+);
 
-const visible = ref(true)
-const timer = ref<number | null>(null)
+const visible = ref(true);
+const timer = ref<number | null>(null);
 
 // 根据类型获取图标名称
 const iconName = computed(() => {
-  console.log('当前消息类型:', props.type)
-  console.log('图标映射:', iconMap)
-  console.log('使用的图标名称:', iconMap[props.type])
-  return iconMap[props.type]
-})
+  console.log('当前消息类型:', props.type);
+  console.log('图标映射:', iconMap);
+  console.log('使用的图标名称:', iconMap[props.type]);
+  return iconMap[props.type];
+});
 
 const handleConfirm = () => {
   if (props.onConfirm && props.showConfirm) {
-    props.onConfirm()
+    props.onConfirm();
   }
-  close()
-}
+  close();
+};
 
 const handleCancel = () => {
   if (props.onCancel && props.showCancel) {
-    props.onCancel()
+    props.onCancel();
   }
-  close()
-}
+  close();
+};
 
 const close = () => {
-  visible.value = false
+  visible.value = false;
   if (timer.value) {
-    clearTimeout(timer.value)
-    timer.value = null
+    clearTimeout(timer.value);
+    timer.value = null;
   }
-}
+};
 
 const handleAfterLeave = () => {
   if (props.onClosed) {
-    props.onClosed()
+    props.onClosed();
   }
-}
+};
 
 onMounted(() => {
   if (props.duration > 0) {
     timer.value = window.setTimeout(() => {
-      close()
-    }, props.duration)
+      close();
+    }, props.duration);
   }
-})
+});
 
 defineExpose({
   close,
   confirm: handleConfirm,
-  cancel: handleCancel
-})
+  cancel: handleCancel,
+});
 </script>
 
 <style lang="scss" scoped>
@@ -196,29 +225,30 @@ defineExpose({
   color: #606266;
 }
 
-// .message-success {
-//   background-color: #f0f9eb;
-//   border: 1px solid #e1f3d8;
-//   color: #67c23a;
-// }
+// 消息类型样式
+.message-success {
+  .message-icon {
+    color: #67c23a;
+  }
+}
 
-// .message-error {
-//   background-color: #fef0f0;
-//   border: 1px solid #fde2e2;
-//   color: #f56c6c;
-// }
+.message-error {
+  .message-icon {
+    color: #f56c6c;
+  }
+}
 
-// .message-warning {
-//   background-color: #fdf6ec;
-//   border: 1px solid #faecd8;
-//   color: #e6a23c;
-// }
+.message-warning {
+  .message-icon {
+    color: #e6a23c;
+  }
+}
 
-// .message-info {
-//   background-color: #f4f4f5;
-//   border: 1px solid #ebeef5;
-//   color: #909399;
-// }
+.message-info {
+  .message-icon {
+    color: #909399;
+  }
+}
 
 .cui-new-message-box .message-close-icon {
   font-style: normal;
@@ -232,7 +262,9 @@ defineExpose({
 
 .cui-new-message-box .message-fade-enter-active,
 .cui-new-message-box .message-fade-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
 
 .cui-new-message-box .message-fade-enter-from,

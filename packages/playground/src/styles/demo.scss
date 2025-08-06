@@ -1,0 +1,64 @@
+// 演示容器基础样式
+.demo-container {
+  &.fill-height {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .demo-section {
+    margin-bottom: 32px;
+    height: 100%;
+
+    &.fill-height {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+
+    h4 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #374151;
+      flex-shrink: 0;
+    }
+
+    .demo-item {
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+
+      &.fill-height {
+        flex: 1;
+        min-height: 0;
+        height: 100%;
+        padding: 0;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+// 响应式调整
+@media (max-width: 768px) {
+  .demo-container {
+    .demo-section {
+      margin-bottom: 24px;
+
+      h4 {
+        font-size: 15px;
+      }
+
+      .demo-item {
+        padding: 16px;
+
+        &.fill-height {
+          padding: 0;
+        }
+      }
+    }
+  }
+}

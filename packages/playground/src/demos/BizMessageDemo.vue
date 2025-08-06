@@ -1,41 +1,12 @@
 <template>
   <div class="demo-container">
     <div class="demo-section">
-      <h4>基础用法</h4>
+      <h4>使用说明</h4>
       <div class="demo-item">
-        <BizMessage
-          type="success"
-          title="成功提示"
-          message="这是一个成功消息"
-          :show-close="true"
-          :show-confirm="true"
-        />
-      </div>
-    </div>
-
-    <div class="demo-section">
-      <h4>不同类型</h4>
-      <div class="demo-item">
-        <div class="message-types">
-          <BizMessage
-            type="info"
-            title="信息提示"
-            message="这是一个信息消息"
-            :show-close="true"
-          />
-          <BizMessage
-            type="warning"
-            title="警告提示"
-            message="这是一个警告消息"
-            :show-close="true"
-          />
-          <BizMessage
-            type="error"
-            title="错误提示"
-            message="这是一个错误消息"
-            :show-close="true"
-          />
-        </div>
+        <p class="usage-tip">
+          <strong>BizMessage</strong> 是一个消息提示组件，通过 JavaScript API
+          调用，而不是在模板中直接使用。 点击下方按钮体验不同类型的消息提示。
+        </p>
       </div>
     </div>
 

@@ -19,6 +19,7 @@
       "require": "./dist/index.cjs",
       "browser": "./dist/index.umd.js"
     },
+    "./style": "./dist/style.css",
     "./dist/style.css": "./dist/style.css"
   },
   "files": [

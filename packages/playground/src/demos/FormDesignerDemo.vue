@@ -1,8 +1,8 @@
 <template>
-  <div class="demo-container">
-    <div class="demo-section">
+  <div class="demo-container fill-height">
+    <div class="demo-section fill-height">
       <h4>表单设计器</h4>
-      <div class="demo-item">
+      <div class="demo-item fill-height">
         <DesignForm :schemaConf="designformSchema" />
       </div>
     </div>
@@ -15,21 +15,5 @@ import { designformSchema } from '../schema/designformSchema';
 </script>
 
 <style lang="scss" scoped>
-.demo-container {
-  .demo-section {
-    h4 {
-      margin: 0 0 16px 0;
-      font-size: 16px;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .demo-item {
-      height: 600px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-  }
-}
+@import '../styles/demo.scss';
 </style>

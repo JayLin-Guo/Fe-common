@@ -8,8 +8,12 @@
           :config="tableConfig"
           :total="100"
           v-model="paginationParams"
-          @search="handleTableSearch"
-        />
+          @changePage="handleTableSearch"
+        >
+          <template #action="{ row }">
+            <el-button type="primary" @click="handleEdit(row)">编辑</el-button>
+          </template>
+        </BaseTable>
       </div>
     </div>
   </div>
@@ -17,21 +21,22 @@
 
 <script setup>
 import { ref } from 'vue';
+import { BaseTable } from '@jr/ui-components';
 
 const tableData = ref([
   { id: 1, name: '张三', age: 25, city: '北京' },
   { id: 2, name: '李四', age: 30, city: '上海' },
   { id: 3, name: '王五', age: 28, city: '广州' },
-  { id: 4, name: '赵六', age: 35, city: '深圳' },
-  { id: 5, name: '钱七', age: 22, city: '杭州' },
+  { id: 4, name: '钱七', age: 22, city: '杭州' },
 ]);
 
 const tableConfig = ref({
   tableColumn: [
     { prop: 'id', label: 'ID', width: 80 },
     { prop: 'name', label: '姓名', width: 120 },
-    { prop: 'age', label: '年龄', width: 80 },
+    { prop: 'age', label: '年龄' },
     { prop: 'city', label: '城市' },
+    { prop: '', label: '操作', slotName: 'action' },
   ],
   pagingColumn: {
     layout: 'total,prev, pager, next, sizes,jumper',
@@ -44,8 +49,12 @@ const paginationParams = ref({
   limit: 10,
 });
 
-const handleTableSearch = () => {
-  console.log('表格搜索:', paginationParams.value);
+const handleTableSearch = params => {
+  console.log('表格搜索:', params);
+};
+
+const handleEdit = row => {
+  console.log('编辑:', row);
 };
 </script>
 
