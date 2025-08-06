@@ -1,0 +1,36 @@
+{
+  "name": "component",
+  "description": "Vue3组件模板",
+  "files": [
+    {
+      "template": "Component.vue.hbs",
+      "output": "{{name}}/{{name}}.vue"
+    },
+    {
+      "template": "Component.types.ts.hbs", 
+      "output": "{{name}}/{{name}}.types.ts"
+    },
+    {
+      "template": "Component.scss.hbs",
+      "output": "{{name}}/{{name}}.scss"
+    },
+    {
+      "template": "index.ts.hbs",
+      "output": "{{name}}/index.ts"
+    }
+  ],
+  "prompts": [
+    {
+      "name": "name",
+      "type": "input",
+      "message": "组件名称 (PascalCase):",
+      "default": "MyComponent"
+    },
+    {
+      "name": "description",
+      "type": "input", 
+      "message": "组件描述:",
+      "default": "新组件"
+    }
+  ]
+} 

@@ -1,0 +1,27 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "Jr UI组件库测试环境",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext vue,js,ts,jsx,tsx --fix"
+  },
+  "dependencies": {
+    "vue": "^3.3.0",
+    "element-plus": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vue-tsc": "^1.8.0"
+  }
+}

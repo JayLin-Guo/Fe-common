@@ -1,0 +1,32 @@
+<template>
+  <div :class="classes" v-bind="$attrs">
+    <slot />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import type { {{name}}Props, {{name}}Emits } from './{{name}}.types';
+
+defineOptions({
+  name: 'Jr{{name}}',
+  inheritAttrs: false,
+});
+
+const props = withDefaults(defineProps<{{name}}Props>(), {
+  // 设置默认值
+});
+
+const emit = defineEmits<{{name}}Emits>();
+
+const baseClass = 'jr-{{kebabCase name}}';
+
+const classes = computed(() => [
+  baseClass,
+  props.class,
+].filter(Boolean));
+</script>
+
+<style scoped lang="scss">
+@import './{{name}}.scss';
+</style> 

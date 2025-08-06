@@ -1,0 +1,61 @@
+// Jr UI组件库基础样式
+
+// CSS Reset
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+// 通用工具类
+.jr-flex {
+  display: flex;
+}
+
+.jr-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jr-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.jr-flex-wrap {
+  flex-wrap: wrap;
+}
+
+// 文本对齐
+.jr-text-left { text-align: left; }
+.jr-text-center { text-align: center; }
+.jr-text-right { text-align: right; }
+
+// 显示隐藏
+.jr-show { display: block !important; }
+.jr-hide { display: none !important; }
+
+// 间距工具类
+@each $name, $size in (
+  'xs': var(--jr-spacing-xs),
+  'sm': var(--jr-spacing-sm), 
+  'md': var(--jr-spacing-md),
+  'lg': var(--jr-spacing-lg),
+  'xl': var(--jr-spacing-xl)
+) {
+  .jr-m-#{$name} { margin: #{$size} !important; }
+  .jr-mt-#{$name} { margin-top: #{$size} !important; }
+  .jr-mr-#{$name} { margin-right: #{$size} !important; }
+  .jr-mb-#{$name} { margin-bottom: #{$size} !important; }
+  .jr-ml-#{$name} { margin-left: #{$size} !important; }
+  .jr-mx-#{$name} { margin-left: #{$size} !important; margin-right: #{$size} !important; }
+  .jr-my-#{$name} { margin-top: #{$size} !important; margin-bottom: #{$size} !important; }
+  
+  .jr-p-#{$name} { padding: #{$size} !important; }
+  .jr-pt-#{$name} { padding-top: #{$size} !important; }
+  .jr-pr-#{$name} { padding-right: #{$size} !important; }
+  .jr-pb-#{$name} { padding-bottom: #{$size} !important; }
+  .jr-pl-#{$name} { padding-left: #{$size} !important; }
+  .jr-px-#{$name} { padding-left: #{$size} !important; padding-right: #{$size} !important; }
+  .jr-py-#{$name} { padding-top: #{$size} !important; padding-bottom: #{$size} !important; }
+} 
