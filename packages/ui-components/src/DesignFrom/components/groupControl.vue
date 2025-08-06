@@ -115,7 +115,7 @@ const handleItemClone = (item, index) => {
 
 <style scoped>
 .group-control {
-  padding: 8px;
+  /* padding: 8px; */
   cursor: pointer;
 
   &:hover {

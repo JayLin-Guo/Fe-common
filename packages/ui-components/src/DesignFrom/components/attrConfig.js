@@ -1,6 +1,33 @@
 // 属性配置管理器
 // 定义每种组件的默认属性配置
 
+// 由于是 JS 文件，直接定义组件类型常量
+const FormComponentType = {
+  INPUT: 'input',
+  TEXTAREA: 'textarea',
+  INPUT_NUMBER: 'inputNumber',
+  SELECT: 'select',
+  RADIO: 'radio',
+  CHECKBOX: 'checkbox',
+  SWITCH: 'switch',
+  CASCADER: 'cascader',
+  TREE_SELECT: 'treeSelect',
+  DATE_PICKER: 'datePicker',
+  TIME_PICKER: 'timePicker',
+  SLIDER: 'slider',
+  RATE: 'rate',
+  COLOR_PICKER: 'colorPicker',
+  BUTTON: 'button',
+  TEXT: 'txt',
+  TITLE: 'title',
+  GRID: 'grid',
+  DIV: 'div',
+  CARD: 'card',
+  TABS: 'tabs',
+  FLEX: 'flex',
+  DIVIDER: 'divider',
+};
+
 // 属性控件类型枚举
 export const ATTR_TYPES = {
   INPUT: 'input', // 文本输入
@@ -404,6 +431,565 @@ const DEFAULT_ATTR_CONFIGS = {
             type: ATTR_TYPES.NUMBER,
             defaultValue: '',
             placeholder: '请输入最大行数（可选）',
+          },
+        ],
+      },
+    ],
+  },
+
+  // ===== Element Plus 组件配置 =====
+
+  // 数字输入框
+  [FormComponentType.INPUT_NUMBER]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS, ...INPUT_ATTRS],
+      },
+      {
+        title: '数值设置',
+        attrs: [
+          {
+            key: 'control.min',
+            label: '最小值',
+            type: ATTR_TYPES.NUMBER,
+            defaultValue: '',
+            placeholder: '请输入最小值',
+          },
+          {
+            key: 'control.max',
+            label: '最大值',
+            type: ATTR_TYPES.NUMBER,
+            defaultValue: '',
+            placeholder: '请输入最大值',
+          },
+          {
+            key: 'control.step',
+            label: '步长',
+            type: ATTR_TYPES.NUMBER,
+            defaultValue: 1,
+            placeholder: '请输入步长',
+          },
+          {
+            key: 'control.precision',
+            label: '精度',
+            type: ATTR_TYPES.NUMBER,
+            defaultValue: '',
+            placeholder: '请输入精度',
+          },
+        ],
+      },
+    ],
+  },
+
+  // 开关
+  [FormComponentType.SWITCH]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS],
+      },
+      {
+        title: '开关设置',
+        attrs: [
+          {
+            key: 'control.activeText',
+            label: '打开时文字',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: '',
+            placeholder: '请输入打开时显示的文字',
+          },
+          {
+            key: 'control.inactiveText',
+            label: '关闭时文字',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: '',
+            placeholder: '请输入关闭时显示的文字',
+          },
+          {
+            key: 'control.activeValue',
+            label: '打开时的值',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: true,
+            placeholder: '请输入打开时的值',
+          },
+          {
+            key: 'control.inactiveValue',
+            label: '关闭时的值',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: false,
+            placeholder: '请输入关闭时的值',
+          },
+        ],
+      },
+    ],
+  },
+
+  // 滑块
+  [FormComponentType.SLIDER]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS],
+      },
+      {
+        title: '滑块设置',
+        attrs: [
+          {
+            key: 'control.min',
+            label: '最小值',
+            type: ATTR_TYPES.NUMBER,
+            defaultValue: 0,
+            placeholder: '请输入最小值',
+          },
+          {
+            key: 'control.max',
+            label: '最大值',
+            type: ATTR_TYPES.NUMBER,
+            defaultValue: 100,
+            placeholder: '请输入最大值',
+          },
+          {
+            key: 'control.step',
+            label: '步长',
+            type: ATTR_TYPES.NUMBER,
+            defaultValue: 1,
+            placeholder: '请输入步长',
+          },
+          {
+            key: 'control.showStops',
+            label: '显示间断点',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.range',
+            label: '范围选择',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+        ],
+      },
+    ],
+  },
+
+  // 评分
+  [FormComponentType.RATE]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS],
+      },
+      {
+        title: '评分设置',
+        attrs: [
+          {
+            key: 'control.max',
+            label: '最大分值',
+            type: ATTR_TYPES.NUMBER,
+            defaultValue: 5,
+            placeholder: '请输入最大分值',
+          },
+          {
+            key: 'control.allowHalf',
+            label: '允许半选',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.showText',
+            label: '显示辅助文字',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.showScore',
+            label: '显示当前分数',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+        ],
+      },
+    ],
+  },
+
+  // 颜色选择器
+  [FormComponentType.COLOR_PICKER]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS],
+      },
+      {
+        title: '颜色设置',
+        attrs: [
+          {
+            key: 'control.showAlpha',
+            label: '支持透明度',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.colorFormat',
+            label: '颜色格式',
+            type: ATTR_TYPES.SELECT,
+            defaultValue: 'hex',
+            options: [
+              { label: 'HEX', value: 'hex' },
+              { label: 'RGB', value: 'rgb' },
+              { label: 'HSL', value: 'hsl' },
+              { label: 'HSV', value: 'hsv' },
+            ],
+          },
+          {
+            key: 'control.predefine',
+            label: '预定义颜色',
+            type: ATTR_TYPES.OPTIONS,
+            defaultValue: [],
+          },
+        ],
+      },
+    ],
+  },
+
+  // 日期选择器
+  [FormComponentType.DATE_PICKER]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS, ...INPUT_ATTRS],
+      },
+      {
+        title: '日期设置',
+        attrs: [
+          {
+            key: 'control.type',
+            label: '选择器类型',
+            type: ATTR_TYPES.SELECT,
+            defaultValue: 'date',
+            options: [
+              { label: '日期', value: 'date' },
+              { label: '日期时间', value: 'datetime' },
+              { label: '日期范围', value: 'daterange' },
+              { label: '日期时间范围', value: 'datetimerange' },
+              { label: '年', value: 'year' },
+              { label: '月', value: 'month' },
+              { label: '周', value: 'week' },
+            ],
+          },
+          {
+            key: 'control.format',
+            label: '显示格式',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: 'YYYY-MM-DD',
+            placeholder: '请输入日期格式',
+          },
+          {
+            key: 'control.valueFormat',
+            label: '值格式',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: 'YYYY-MM-DD',
+            placeholder: '请输入值格式',
+          },
+        ],
+      },
+    ],
+  },
+
+  // 时间选择器
+  [FormComponentType.TIME_PICKER]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS, ...INPUT_ATTRS],
+      },
+      {
+        title: '时间设置',
+        attrs: [
+          {
+            key: 'control.isRange',
+            label: '范围选择',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.format',
+            label: '显示格式',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: 'HH:mm:ss',
+            placeholder: '请输入时间格式',
+          },
+          {
+            key: 'control.valueFormat',
+            label: '值格式',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: 'HH:mm:ss',
+            placeholder: '请输入值格式',
+          },
+        ],
+      },
+    ],
+  },
+
+  // 级联选择器
+  [FormComponentType.CASCADER]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS, ...INPUT_ATTRS],
+      },
+      {
+        title: '级联设置',
+        attrs: [
+          {
+            key: 'control.options',
+            label: '数据选项',
+            type: ATTR_TYPES.OPTIONS,
+            defaultValue: [
+              {
+                label: '选项1',
+                value: 'option1',
+                children: [
+                  { label: '子选项1-1', value: 'option1-1' },
+                  { label: '子选项1-2', value: 'option1-2' },
+                ],
+              },
+            ],
+          },
+          {
+            key: 'control.multiple',
+            label: '多选',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.checkStrictly',
+            label: '任意级别可选',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.showAllLevels',
+            label: '显示完整路径',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: true,
+          },
+        ],
+      },
+    ],
+  },
+
+  // 树形选择器
+  [FormComponentType.TREE_SELECT]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [...BASE_ATTRS, ...FORM_CONTROL_ATTRS, ...INPUT_ATTRS],
+      },
+      {
+        title: '树形设置',
+        attrs: [
+          {
+            key: 'control.data',
+            label: '数据选项',
+            type: ATTR_TYPES.OPTIONS,
+            defaultValue: [
+              {
+                label: '选项1',
+                value: 'option1',
+                children: [
+                  { label: '子选项1-1', value: 'option1-1' },
+                  { label: '子选项1-2', value: 'option1-2' },
+                ],
+              },
+            ],
+          },
+          {
+            key: 'control.multiple',
+            label: '多选',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.checkStrictly',
+            label: '严格模式',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.checkOnClickNode',
+            label: '点击节点选中',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+        ],
+      },
+    ],
+  },
+
+  // 按钮
+  [FormComponentType.BUTTON]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [
+          {
+            key: 'control.label',
+            label: '按钮文字',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: '按钮',
+            placeholder: '请输入按钮文字',
+          },
+        ],
+      },
+      {
+        title: '按钮样式',
+        attrs: [
+          {
+            key: 'control.type',
+            label: '按钮类型',
+            type: ATTR_TYPES.SELECT,
+            defaultValue: 'default',
+            options: [
+              { label: '默认', value: 'default' },
+              { label: '主要', value: 'primary' },
+              { label: '成功', value: 'success' },
+              { label: '信息', value: 'info' },
+              { label: '警告', value: 'warning' },
+              { label: '危险', value: 'danger' },
+            ],
+          },
+          {
+            key: 'control.size',
+            label: '按钮大小',
+            type: ATTR_TYPES.SELECT,
+            defaultValue: 'default',
+            options: [
+              { label: '大', value: 'large' },
+              { label: '默认', value: 'default' },
+              { label: '小', value: 'small' },
+            ],
+          },
+          {
+            key: 'control.plain',
+            label: '朴素按钮',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.round',
+            label: '圆角按钮',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+          {
+            key: 'control.circle',
+            label: '圆形按钮',
+            type: ATTR_TYPES.CHECKBOX,
+            defaultValue: false,
+          },
+        ],
+      },
+    ],
+  },
+
+  // 文本
+  [FormComponentType.TEXT]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [
+          {
+            key: 'control.modelValue',
+            label: '文本内容',
+            type: ATTR_TYPES.TEXTAREA,
+            defaultValue: '文本内容',
+            placeholder: '请输入文本内容',
+          },
+        ],
+      },
+      {
+        title: '样式设置',
+        attrs: [
+          {
+            key: 'control.color',
+            label: '文字颜色',
+            type: ATTR_TYPES.COLOR,
+            defaultValue: '',
+            placeholder: '请选择文字颜色',
+          },
+          {
+            key: 'control.fontSize',
+            label: '字体大小',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: '',
+            placeholder: '如：14px, 1.2em',
+          },
+          {
+            key: 'control.fontWeight',
+            label: '字体粗细',
+            type: ATTR_TYPES.SELECT,
+            defaultValue: 'normal',
+            options: [
+              { label: '正常', value: 'normal' },
+              { label: '粗体', value: 'bold' },
+              { label: '细体', value: 'lighter' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // 标题
+  [FormComponentType.TITLE]: {
+    groups: [
+      {
+        title: '基础属性',
+        attrs: [
+          {
+            key: 'control.modelValue',
+            label: '标题内容',
+            type: ATTR_TYPES.INPUT,
+            defaultValue: '标题',
+            placeholder: '请输入标题内容',
+          },
+        ],
+      },
+      {
+        title: '样式设置',
+        attrs: [
+          {
+            key: 'control.level',
+            label: '标题级别',
+            type: ATTR_TYPES.SELECT,
+            defaultValue: 'h3',
+            options: [
+              { label: 'H1', value: 'h1' },
+              { label: 'H2', value: 'h2' },
+              { label: 'H3', value: 'h3' },
+              { label: 'H4', value: 'h4' },
+              { label: 'H5', value: 'h5' },
+              { label: 'H6', value: 'h6' },
+            ],
+          },
+          {
+            key: 'control.color',
+            label: '文字颜色',
+            type: ATTR_TYPES.COLOR,
+            defaultValue: '',
+            placeholder: '请选择文字颜色',
+          },
+          {
+            key: 'control.textAlign',
+            label: '文字对齐',
+            type: ATTR_TYPES.SELECT,
+            defaultValue: 'left',
+            options: [
+              { label: '左对齐', value: 'left' },
+              { label: '居中', value: 'center' },
+              { label: '右对齐', value: 'right' },
+            ],
           },
         ],
       },

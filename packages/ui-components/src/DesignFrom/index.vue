@@ -82,6 +82,7 @@ const handleToolClick = (type: string) => {
       break;
 
     case 'save':
+      console.log(state, 'state===>>>>');
       // 保存表单
       emits('save', {
         formData: state.formData,
