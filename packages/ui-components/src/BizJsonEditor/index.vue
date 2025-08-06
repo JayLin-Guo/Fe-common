@@ -5,7 +5,7 @@
     v-model="jsonString"
     lang="json"
     theme="dark"
-    Mode="code"
+    mode="code"
     :navigationBar="false"
     :statusBar="false"
     :mainMenuBar="false"
