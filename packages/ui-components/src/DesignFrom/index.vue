@@ -8,7 +8,6 @@ import {
   watch,
   watchEffect,
   PropType,
-  toRefs,
 } from 'vue';
 import { SchemaJson } from './types/designForm';
 import DragControl from './components/dragControl.vue';
@@ -20,7 +19,6 @@ import {
   defaultComponentsConf,
   layoutComponentsConf,
 } from './components/beseFormSchema';
-import BizJsonEditor from '../BizJsonEditor/index.vue';
 
 defineOptions({ name: 'designFormIndex' });
 
@@ -54,7 +52,6 @@ const state = reactive({
   loading: false,
   formDataPreview: {},
   previewVisible: false,
-  previewJsonVisible: false,
   designType: 'default',
   formDict: {},
   formOtherData: {
@@ -93,8 +90,17 @@ const handleToolClick = (type: string) => {
       });
       break;
 
-    case 'previewJson':
-      state.previewJsonVisible = !state.previewJsonVisible;
+    case 'import':
+      // 导入表单
+      emits('import');
+      break;
+
+    case 'export':
+      // 导出表单
+      emits('export', {
+        formData: state.formData,
+        formOtherData: state.formOtherData,
+      });
       break;
   }
 };
@@ -132,7 +138,7 @@ const handleUpdateElement = (updatedElement: any) => {
   }
 };
 
-const controlSchemas = computed(() => {
+const controlSchema = computed(() => {
   if (props.schemaConf.filedSchema) {
     return props.schemaConf.filedSchema.concat(layoutComponentsConf);
   }
@@ -140,19 +146,6 @@ const controlSchemas = computed(() => {
   return defaultComponentsConf;
 });
 
-const jsonData = computed(() => {
-  return JSON.parse(JSON.stringify(state.formData));
-});
-const jsonEditorRef = ref<any>(null);
-
-const handleSave = () => {
-  if (jsonEditorRef.value.validateJson()) {
-    console.log(jsonData.value, 'jsonData');
-
-    return;
-  }
-  state.previewJsonVisible = false;
-};
 const initDesignFormData = async () => {
   pageLoading.value = true;
   try {
@@ -176,7 +169,7 @@ onBeforeMount(() => {
 <template>
   <div class="design-container" v-loading="pageLoading">
     <div class="filed-container">
-      <drag-control :controlSchema="controlSchemas" />
+      <drag-control :controlSchema="controlSchema" />
     </div>
 
     <div class="main-body">
@@ -202,26 +195,6 @@ onBeforeMount(() => {
         @update-element="handleUpdateElement"
       />
     </div>
-
-    <el-dialog
-      v-model="state.previewJsonVisible"
-      title="表单Json Schema"
-      width="80%"
-    >
-      <div
-        style="height: 500px; overflow-y: scroll"
-        v-if="state.previewJsonVisible"
-      >
-        <biz-json-editor
-          v-model="jsonData"
-          ref="jsonEditorRef"
-          theme="chrome"
-        />
-      </div>
-      <template #footer>
-        <el-button type="primary" @click="handleSave">保存</el-button>
-      </template>
-    </el-dialog>
   </div>
 </template>
 

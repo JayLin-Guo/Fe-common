@@ -48,7 +48,6 @@ const btnList = computed(() => {
   const list = [
     { icon: 'delete', label: '清空', key: 1 },
     { icon: 'preview', label: '预览', key: 2 },
-    { icon: 'previewJson', label: 'Json Schema', key: 3 },
     // { icon: 'export', label: '导出', key: 4 },
     { icon: 'save', label: '保存', key: 5 },
   ];

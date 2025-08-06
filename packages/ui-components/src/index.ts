@@ -5,7 +5,7 @@ import type { App, Plugin } from 'vue';
 export { BizMessage, BizMessageVue } from './BizMessage/index';
 export { default as BaseTable } from './baseTable/index.vue';
 export { default as DesignForm } from './DesignFrom/index.vue';
-export { default as BizJsonEditor } from './BizJsonEditor/index.vue';
+
 // 导出类型定义
 export * from './types';
 export * from './BizMessage/type';
@@ -15,10 +15,9 @@ export * from './baseTable/type';
 import BizMessagePlugin from './BizMessage/index';
 import BaseTable from './baseTable/index.vue';
 import DesignForm from './DesignFrom/index.vue';
-import BizJsonEditor from './BizJsonEditor/index.vue';
 
 // 组件列表
-const components = [BaseTable, DesignForm, BizJsonEditor];
+const components = [BaseTable, DesignForm];
 
 // 插件列表
 const plugins = [BizMessagePlugin];
