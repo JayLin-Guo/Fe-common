@@ -100,7 +100,8 @@ const toggleCardContent = () => {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../../styles/theme.scss' as *;
 .card-widget {
   margin: 8px 0;
   transition: all 0.2s ease;
@@ -112,8 +113,8 @@ const toggleCardContent = () => {
   /* 设计模式下的选中状态会由父组件的.active类控制 */
   .form-item-wrapper.active & {
     .card-container {
-      border-color: #ff6700;
-      box-shadow: 0 0 0 1px #ff6700;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 1px $primary-color;
     }
   }
 }
@@ -194,9 +195,9 @@ const toggleCardContent = () => {
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: #ff6700;
-    background: rgba(255, 103, 0, 0.02);
-    color: #ff6700;
+    border-color: $primary-color;
+    background: $primary-ultra-light;
+    color: $primary-color;
   }
 }
 
@@ -228,9 +229,9 @@ const toggleCardContent = () => {
   }
 
   &.toggle-btn:hover {
-    border-color: #ff6700;
-    color: #ff6700;
-    background: rgba(255, 103, 0, 0.05);
+    border-color: $primary-color;
+    color: $primary-color;
+    background: $primary-lighter;
   }
 }
 

@@ -16,12 +16,12 @@
       <template v-if="item.icon === 'save'">
         <Icon icon="carbon:save" class="icon" />
       </template>
-      <template v-if="item.icon === 'import'">
+      <!-- <template v-if="item.icon === 'import'">
         <Icon icon="carbon:document-import" class="icon" />
       </template>
       <template v-if="item.icon === 'export'">
         <Icon icon="carbon:document-export" class="icon" />
-      </template>
+      </template> -->
       <span>{{ item.label }}</span>
     </div>
   </div>
@@ -48,8 +48,8 @@ const btnList = computed(() => {
   const list = [
     { icon: 'delete', label: '清空', key: 1 },
     { icon: 'preview', label: '预览', key: 2 },
-    { icon: 'import', label: '导入', key: 3 },
-    { icon: 'export', label: '导出', key: 4 },
+    { icon: 'previewJson', label: 'Json Schema', key: 3 },
+    // { icon: 'export', label: '导出', key: 4 },
     { icon: 'save', label: '保存', key: 5 },
   ];
 
