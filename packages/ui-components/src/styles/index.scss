@@ -1,6 +1,6 @@
 // Jr UI组件库全局样式
-@import './variables.scss';
-@import './base.scss';
+@use './variables.scss';
+@use './base.scss';
 
 // 组件样式
 // 注意：组件样式会通过 scoped 自动处理，这里主要放全局样式
@@ -8,4 +8,4 @@
 // 如果需要全局引入组件样式，可以在这里添加
 // @import '../BizMessage/style.scss';
 // @import '../BizMainForm/style.scss';
-// 等等... 
+// 等等...

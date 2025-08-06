@@ -443,7 +443,7 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/theme.scss';
+@use '../styles/theme.scss' as *;
 
 .form-item-wrapper {
   @include form-item-wrapper;

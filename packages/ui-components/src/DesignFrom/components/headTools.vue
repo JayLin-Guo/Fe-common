@@ -68,7 +68,7 @@ const btnClick = type => {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/theme.scss';
+@use '../styles/theme.scss' as *;
 
 .main-tools {
   @include toolbar-base;

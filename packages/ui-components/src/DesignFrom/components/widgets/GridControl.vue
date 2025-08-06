@@ -189,7 +189,7 @@ const handleNestedItemClone = (item, index) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/theme.scss';
+@use '../../styles/theme.scss' as *;
 .grid-widget {
   @include form-item-wrapper;
   width: 100%;

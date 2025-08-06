@@ -75,7 +75,7 @@ const handleFocus = event => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/theme.scss';
+@use '../../styles/theme.scss' as *;
 
 .input-widget {
   padding: $spacing-xs;

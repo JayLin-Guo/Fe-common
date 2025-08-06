@@ -10,10 +10,13 @@
 </template>
 
 <script setup>
-import DesignForm from '@jr/ui-components/DesignFrom/index.vue';
-import { designformSchema } from '../schema/designformSchema';
+import { DesignForm } from '@jr/ui-components';
+import { ref } from 'vue';
+// import { designformSchema } from '../schema/designformSchema';
+
+const designformSchema = ref();
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/demo.scss';
+@use '../styles/demo.scss' as *;
 </style>

@@ -39,7 +39,7 @@ const tableConfig = ref({
     { prop: '', label: '操作', slotName: 'action' },
   ],
   pagingColumn: {
-    layout: 'total,prev, pager, next, sizes,jumper',
+    // layout: 'total,prev, pager, next, sizes,jumper',
     pageSizes: [10, 20, 30, 40],
   },
 });

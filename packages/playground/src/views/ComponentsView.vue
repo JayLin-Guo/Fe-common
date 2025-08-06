@@ -54,10 +54,7 @@ import { Icon } from '@iconify/vue';
 
 // 导入组件演示
 import BizMessageDemo from '../demos/BizMessageDemo.vue';
-import BizMainFormDemo from '../demos/BizMainFormDemo.vue';
-import BizAreaDemo from '../demos/BizAreaDemo.vue';
 import BaseTableDemo from '../demos/BaseTableDemo.vue';
-import BizSvgIconDemo from '../demos/BizSvgIconDemo.vue';
 import FormDesignerDemo from '../demos/FormDesignerDemo.vue';
 
 const selectedComponent = ref(null);
@@ -69,14 +66,6 @@ const components = ref([
     label: 'BizMessage',
     description: '业务消息提示组件',
     icon: 'mdi:message-alert',
-    status: 'stable',
-    statusText: '稳定',
-  },
-  {
-    name: 'BizArea',
-    label: 'BizArea',
-    description: '省市区级联选择器',
-    icon: 'mdi:map-marker',
     status: 'stable',
     statusText: '稳定',
   },
@@ -101,10 +90,7 @@ const components = ref([
 // 组件演示映射
 const demoComponents = {
   BizMessage: BizMessageDemo,
-  BizMainForm: BizMainFormDemo,
-  BizArea: BizAreaDemo,
   BaseTable: BaseTableDemo,
-  BizSvgIcon: BizSvgIconDemo,
   FormDesigner: FormDesignerDemo,
 };
 

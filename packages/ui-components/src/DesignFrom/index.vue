@@ -4,6 +4,7 @@ import {
   provide,
   reactive,
   ref,
+  computed,
   watch,
   watchEffect,
   PropType,
@@ -14,6 +15,10 @@ import HeadTools from './components/headTools.vue';
 import FormControlAttr from './components/formControlAttr.vue';
 import Core from './FormCore.vue';
 import { getGroupName } from './utils.js';
+import {
+  defaultComponentsConf,
+  layoutComponentsConf,
+} from './components/beseFormSchema';
 
 defineOptions({ name: 'designFormIndex' });
 
@@ -132,6 +137,14 @@ const handleUpdateElement = (updatedElement: any) => {
   }
 };
 
+const controlSchema = computed(() => {
+  if (props.schemaConf.filedSchema) {
+    return props.schemaConf.filedSchema.concat(layoutComponentsConf);
+  }
+
+  return defaultComponentsConf;
+});
+
 const initDesignFormData = async () => {
   pageLoading.value = true;
   try {
@@ -155,7 +168,7 @@ onBeforeMount(() => {
 <template>
   <div class="design-container" v-loading="pageLoading">
     <div class="filed-container">
-      <drag-control :controlSchema="schemaConf.filedSchema" />
+      <drag-control :controlSchema="controlSchema" />
     </div>
 
     <div class="main-body">
@@ -185,7 +198,7 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss" scoped>
-@import './styles/theme.scss';
+@use './styles/theme.scss' as *;
 
 .design-container {
   display: flex;

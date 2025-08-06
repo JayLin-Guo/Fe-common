@@ -29,7 +29,7 @@
 // $font-size-md: 15px;
 
 // 导入主题系统
-@import './theme.scss';
+@use './theme.scss';
 
 // --------------------------------
 // 使用示例
@@ -39,7 +39,7 @@
 // 在Vue组件中使用：
 <style lang="scss" scoped>
 $primary-color: #3b82f6;  // 自定义主题色
-@import './styles/theme.scss';
+@use './styles/theme.scss';
 
 .my-component {
   @include form-item-wrapper;
