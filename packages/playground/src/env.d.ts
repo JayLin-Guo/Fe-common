@@ -13,6 +13,7 @@ declare module '@jr/ui-components' {
   export const BizMainForm: any;
   export const BaseTable: any;
   export const DesignForm: any;
+  export const BizProcessFlow: any;
 
   const JrUI: Plugin;
   export default JrUI;

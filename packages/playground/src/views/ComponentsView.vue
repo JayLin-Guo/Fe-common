@@ -57,6 +57,7 @@ import BizMessageDemo from '../demos/BizMessageDemo.vue';
 import BaseTableDemo from '../demos/BaseTableDemo.vue';
 import FormDesignerDemo from '../demos/FormDesignerDemo.vue';
 import BizJsonEditorDemo from '../demos/BizJsonEditorDemo.vue';
+import ProcessFlowDemo from '../demos/ProcessFlowDemo.vue';
 
 const selectedComponent = ref(null);
 
@@ -94,6 +95,14 @@ const components = ref([
     status: 'stable',
     statusText: '稳定',
   },
+  {
+    name: 'ProcessFlow',
+    label: 'ProcessFlow',
+    description: '横向流程组件，支持鱼尾箭头样式',
+    icon: 'mdi:arrow-right-bold',
+    status: 'stable',
+    statusText: '稳定',
+  },
 ]);
 
 // 组件演示映射
@@ -102,6 +111,7 @@ const demoComponents = {
   BaseTable: BaseTableDemo,
   FormDesigner: FormDesignerDemo,
   BizJsonEditor: BizJsonEditorDemo,
+  ProcessFlow: ProcessFlowDemo,
 };
 
 const viewComponent = component => {
