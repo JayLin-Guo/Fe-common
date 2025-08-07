@@ -91,6 +91,75 @@ const handleUpdateElement = updatedElement => {
 3. **卡片容器嵌套**：`formData.list[2].list[0]`
 4. **多层嵌套**：`formData.list[0].columns[0].list[1].list[0]`
 
+## 新增表格组件
+
+### 📊 表格设计器功能
+
+新增了完整的表格设计器组件，支持：
+
+#### 🎨 可视化设计
+
+- 拖拽表格组件到画布
+- 实时预览表格效果
+- 设计模式下的简化表格展示
+
+#### 🔧 列管理功能
+
+- 点击"管理列"按钮打开列配置弹窗
+- 支持拖拽调整列顺序
+- 动态添加/删除列
+- 配置列属性：
+  - 列类型（普通列、选择框、序号、展开行）
+  - 字段名和标题
+  - 宽度设置（固定宽度、最小宽度）
+  - 对齐方式
+  - 显示提示框、可排序等选项
+
+#### ⚙️ 表格属性配置
+
+- 显示边框开关
+- 斑马纹显示控制
+- 分页组件显示设置
+- 数据总数配置
+- 每页条数选择
+
+#### 🔄 与 BaseTable 组件完全兼容
+
+表格设计器生成的配置与现有的 `BaseTable` 组件完全兼容：
+
+```javascript
+// 设计器生成的配置可直接用于 BaseTable
+<base-table
+  :data="tableData"
+  :config="designerGeneratedConfig"
+  :total="total"
+  v-model="pagination"
+/>
+```
+
+#### 📋 配置格式
+
+生成的表格配置遵循 BaseTable 的标准格式：
+
+```typescript
+interface TableConfig {
+  tableColumn: TableColumn[]; // 表格列配置
+  pagingColumn?: PagingColumn; // 分页配置
+}
+
+interface TableColumn {
+  type?: 'selection' | 'index' | 'expand'; // 列类型
+  prop?: string; // 数据字段名
+  label?: string; // 列标题
+  width?: string | number; // 列宽度
+  minWidth?: string | number; // 最小列宽
+  align?: 'left' | 'center' | 'right'; // 对齐方式
+  showOverflowTooltip?: boolean; // 是否显示提示框
+  slotName?: string; // 插槽名称
+  sortable?: boolean; // 是否可排序
+}
+```
+
 ## 使用示例
 
 ```javascript
@@ -99,6 +168,12 @@ const handleUpdateElement = updatedElement => {
 // 2. 选中该输入框
 // 3. 在右侧属性面板修改标签名称
 // 4. 属性修改会正确反映到JSON数据中
+
+// 表格组件使用示例
+// 1. 拖拽表格组件到设计器
+// 2. 点击"管理列"配置表格结构
+// 3. 在右侧面板设置表格属性
+// 4. 生成的配置可直接用于 BaseTable 渲染
 ```
 
 ## 向后兼容性
@@ -112,3 +187,5 @@ const handleUpdateElement = updatedElement => {
 3. 查看JSON数据，确认属性正确更新
 4. 测试多层嵌套场景
 5. 验证原有功能不受影响
+6. 测试表格组件的列管理功能
+7. 验证表格配置与 BaseTable 组件的兼容性

@@ -219,11 +219,8 @@ const getElementTypeName = type => {
 watch(
   () => props.selectedElement,
   newElement => {
-    console.log('🎯 属性面板接收到新选中元素:', newElement);
-
     if (newElement) {
       localElement.value = JSON.parse(JSON.stringify(newElement));
-      console.log('📋 创建本地副本:', localElement.value);
 
       // 初始化默认属性值
       try {
@@ -246,8 +243,6 @@ watch(
       if (!localElement.value.config) {
         localElement.value.config = {};
       }
-
-      console.log('✅ 属性面板初始化完成');
     }
   },
   { immediate: true, deep: true }
@@ -266,7 +261,6 @@ const setAttrValue = (path, value) => {
 
 // 更新元素
 const updateElement = () => {
-  console.log('📤 属性面板发出更新事件:', localElement.value);
   emits('update-element', localElement.value);
 };
 

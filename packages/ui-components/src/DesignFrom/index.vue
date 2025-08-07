@@ -124,16 +124,10 @@ watch(
 
 // 处理表单项点击（选中）
 const handleItemClick = (item: any, index: number) => {
-  console.log('🎯 选中元素:', item);
-  console.log('📝 元素索引:', index);
-
   state.selectedElement = item;
   state.activeKey = getGroupName(item, index);
   // 添加路径追踪
   state.selectedElementPath = findElementPath(state.formData.list, item);
-
-  console.log('🛤️ 计算出的路径:', state.selectedElementPath);
-  console.log('🔑 激活键:', state.activeKey);
 };
 
 // 处理表单项删除

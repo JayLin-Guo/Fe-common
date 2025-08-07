@@ -76,6 +76,13 @@ const defaultWidgets: Record<string, WidgetConfig> = {
   [FormComponentType.TEXT]: createElementPlusWidget(false),
   [FormComponentType.TITLE]: createElementPlusWidget(false),
 
+  // 表格控件
+  [FormComponentType.TABLE]: {
+    component: defineAsyncComponent(() => import('./widgets/TableControl.vue')),
+    needFormItem: false,
+    canNested: false,
+  },
+
   // 容器控件
   [FormComponentType.GRID]: {
     component: defineAsyncComponent(() => import('./widgets/GridControl.vue')),

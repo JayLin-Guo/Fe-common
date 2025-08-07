@@ -20,6 +20,7 @@ const FormComponentType = {
   BUTTON: 'button',
   TEXT: 'txt',
   TITLE: 'title',
+  TABLE: 'table',
   GRID: 'grid',
   DIV: 'div',
   CARD: 'card',
@@ -1125,4 +1126,94 @@ export function initElementAttrs(element, componentType, customConfig = {}) {
       }
     });
   });
+}
+
+// 表格组件属性配置
+const TABLE_ATTRS = [
+  {
+    key: 'config.showBorder',
+    label: '显示边框',
+    type: ATTR_TYPES.CHECKBOX,
+    defaultValue: true,
+    placeholder: '是否显示表格边框',
+  },
+  {
+    key: 'config.showStripe',
+    label: '斑马纹',
+    type: ATTR_TYPES.CHECKBOX,
+    defaultValue: true,
+    placeholder: '是否显示斑马纹',
+  },
+  {
+    key: 'config.showPagination',
+    label: '显示分页',
+    type: ATTR_TYPES.CHECKBOX,
+    defaultValue: true,
+    placeholder: '是否显示分页组件',
+  },
+  {
+    key: 'control.total',
+    label: '数据总数',
+    type: ATTR_TYPES.NUMBER,
+    defaultValue: 100,
+    placeholder: '表格数据总数',
+  },
+  {
+    key: 'control.modelValue.limit',
+    label: '每页条数',
+    type: ATTR_TYPES.SELECT,
+    defaultValue: 10,
+    options: [
+      { label: '10条/页', value: 10 },
+      { label: '20条/页', value: 20 },
+      { label: '30条/页', value: 30 },
+      { label: '50条/页', value: 50 },
+      { label: '100条/页', value: 100 },
+    ],
+  },
+];
+
+// 添加到组件配置映射中
+if (typeof COMPONENT_ATTR_CONFIG !== 'undefined') {
+  COMPONENT_ATTR_CONFIG[FormComponentType.TABLE] = {
+    groups: [
+      {
+        title: '表格设置',
+        attrs: TABLE_ATTRS,
+      },
+      {
+        title: '提示',
+        attrs: [
+          {
+            key: '_info',
+            label: '列管理',
+            type: 'info',
+            value: '点击表格上的"管理列"按钮来配置表格列',
+          },
+        ],
+      },
+    ],
+  };
+} else {
+  // 如果 COMPONENT_ATTR_CONFIG 不存在，创建它
+  window.COMPONENT_ATTR_CONFIG = window.COMPONENT_ATTR_CONFIG || {};
+  window.COMPONENT_ATTR_CONFIG[FormComponentType.TABLE] = {
+    groups: [
+      {
+        title: '表格设置',
+        attrs: TABLE_ATTRS,
+      },
+      {
+        title: '列管理',
+        attrs: [
+          {
+            key: '_info',
+            label: '说明',
+            type: 'info',
+            value: '点击表格组件上的"管理列"按钮来配置表格的列结构',
+          },
+        ],
+      },
+    ],
+  };
 }

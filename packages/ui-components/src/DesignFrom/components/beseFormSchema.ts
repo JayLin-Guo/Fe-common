@@ -251,6 +251,50 @@ const defaultComponentsConf: SchemaJson[] = [
         },
       },
       {
+        type: 'table',
+        label: '表格',
+        name: 'table',
+        icon: 'table',
+        control: {
+          // 表格数据 - 设计时使用示例数据
+          data: [
+            { id: 1, name: '张三', age: 25, email: 'zhangsan@example.com' },
+            { id: 2, name: '李四', age: 30, email: 'lisi@example.com' },
+            { id: 3, name: '王五', age: 28, email: 'wangwu@example.com' },
+          ],
+          // 表格配置 - 与 baseTable 组件保持一致
+          config: {
+            tableColumn: [
+              { type: 'selection', width: 50 },
+              { type: 'index', label: '序号', width: 70 },
+              { label: '姓名', prop: 'name', minWidth: 100 },
+              { label: '年龄', prop: 'age', width: 80 },
+              {
+                label: '邮箱',
+                prop: 'email',
+                minWidth: 150,
+                showOverflowTooltip: true,
+              },
+            ],
+            pagingColumn: {
+              layout: 'total, sizes, prev, pager, next, jumper',
+              pageSizes: [10, 20, 30, 50],
+            },
+          },
+          // 分页参数
+          modelValue: {
+            page: 1,
+            limit: 10,
+          },
+          total: 100,
+        },
+        config: {
+          showPagination: true, // 是否显示分页
+          showBorder: true, // 是否显示边框
+          showStripe: true, // 是否显示斑马纹
+        },
+      },
+      {
         type: 'txt',
         label: '文字',
         name: 'txt',

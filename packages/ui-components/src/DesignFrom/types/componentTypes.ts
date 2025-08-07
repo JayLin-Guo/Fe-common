@@ -26,6 +26,7 @@ export enum FormComponentType {
   TEXT = 'txt',
   TITLE = 'title',
   BUTTON = 'button',
+  TABLE = 'table',
 
   // 容器组件
   GRID = 'grid',
@@ -55,6 +56,7 @@ export const ELEMENT_COMPONENT_MAP: Record<string, string> = {
   [FormComponentType.BUTTON]: 'el-button',
   [FormComponentType.TEXT]: 'span',
   [FormComponentType.TITLE]: 'h3',
+  [FormComponentType.TABLE]: 'base-table',
 };
 
 // 选项组件映射
