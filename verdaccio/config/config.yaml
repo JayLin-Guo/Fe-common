@@ -1,0 +1,105 @@
+# Verdaccio 配置文件
+storage: /verdaccio/storage/data
+plugins: /verdaccio/plugins
+
+# Web界面配置
+web:
+  title: Jr Private NPM Registry
+  # comment out to disable gravatar support
+  # gravatar: false
+  # by default packages are ordercer ascendant (asc|desc)
+  # sort_packages: asc
+  # convert your UI to the dark side
+  # darkMode: true
+  # logo: http://somedomain/somelogo.png
+  # favicon: http://somedomain/favicon.ico | /path/favicon.ico
+
+# 身份验证
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+    # 最大用户数量，-1表示无限制
+    max_users: -1
+    # 是否允许注册新用户
+    algorithm: bcrypt
+    rounds: 10
+
+# 上游仓库配置
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+    timeout: 30s
+
+  # 可以添加其他上游仓库
+  # taobao:
+  #   url: https://registry.npmmirror.com/
+
+# 包访问控制
+packages:
+  # 私有包（以@jr开头）
+  '@jr/*':
+    # 访问权限
+    access: $authenticated
+    # 发布权限
+    publish: $authenticated
+    # 代理到上游仓库
+    proxy: npmjs
+
+  # 公共包
+  '**':
+    # 访问权限
+    access: $all
+    # 发布权限
+    publish: $authenticated
+    # 代理到上游仓库
+    proxy: npmjs
+
+# 服务器配置
+server:
+  keepAliveTimeout: 60
+
+# 中间件
+middlewares:
+  audit:
+    enabled: true
+
+# 日志配置
+logs: { type: stdout, format: pretty, level: http }
+
+# 监听配置
+listen:
+  - 0.0.0.0:4873
+
+# 发布配置
+publish:
+  allow_offline: false
+
+# URL前缀（如果通过反向代理访问）
+# url_prefix: https://npm.yourcompany.com/
+
+# 通知配置（可选）
+# notify:
+#   method: POST
+#   headers: [{'Content-Type': 'application/json'}]
+#   endpoint: https://usagge.hipchat.com/v2/room/3729485/notification?auth_token=mySecretToken
+#   content: '{"color":"green","message":"New package published: * {{ name }}*","notify":true,"message_format":"text"}'
+
+# 安全配置
+security:
+  api:
+    # JWT令牌配置
+    jwt:
+      sign:
+        expiresIn: 7d
+      verify:
+        someProp: [value]
+  web:
+    sign:
+      expiresIn: 1h
+    verify:
+      someProp: [value]
+
+# 实验性功能
+experiments:
+  # token: false
+  # search: false
