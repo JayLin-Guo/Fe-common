@@ -7,7 +7,8 @@ export { default as BaseTable } from './baseTable/index.vue';
 export { default as DesignForm } from './DesignFrom/index.vue';
 export { default as BizJsonEditor } from './BizJsonEditor/index.vue';
 export { default as BizProcessFlow } from './ProcessFlow/index.vue';
-
+export { default as CustomTable } from './CustomTable/index.vue';
+export type { CustomTableProps, TableColumn } from './CustomTable/types';
 // 导出类型定义
 export * from './types';
 export * from './BizMessage/type';
@@ -20,9 +21,16 @@ import BaseTable from './baseTable/index.vue';
 import DesignForm from './DesignFrom/index.vue';
 import BizJsonEditor from './BizJsonEditor/index.vue';
 import BizProcessFlow from './ProcessFlow/index.vue';
+import CustomTable from './CustomTable/index.vue';
 
 // 组件列表
-const components = [BaseTable, DesignForm, BizJsonEditor, BizProcessFlow];
+const components = [
+  BaseTable,
+  DesignForm,
+  BizJsonEditor,
+  BizProcessFlow,
+  CustomTable,
+];
 
 // 插件列表
 const plugins = [BizMessagePlugin];

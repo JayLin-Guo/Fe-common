@@ -14,6 +14,8 @@ declare module '@jr/ui-components' {
   export const BaseTable: any;
   export const DesignForm: any;
   export const BizProcessFlow: any;
+  export const CustomTable: any;
+  export type { TableColumn } from './CustomTable/types';
 
   const JrUI: Plugin;
   export default JrUI;

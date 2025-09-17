@@ -58,6 +58,7 @@ import BaseTableDemo from '../demos/BaseTableDemo.vue';
 import FormDesignerDemo from '../demos/FormDesignerDemo.vue';
 import BizJsonEditorDemo from '../demos/BizJsonEditorDemo.vue';
 import ProcessFlowDemo from '../demos/ProcessFlowDemo.vue';
+import CustomTableDemo from '../demos/CustomTableDemo/index.vue';
 
 const selectedComponent = ref(null);
 
@@ -103,6 +104,14 @@ const components = ref([
     status: 'stable',
     statusText: '稳定',
   },
+  {
+    name: 'CustomTable',
+    label: 'CustomTable',
+    description: '自定义表格组件',
+    icon: 'mdi:arrow-right-bold',
+    status: 'stable',
+    statusText: '稳定',
+  },
 ]);
 
 // 组件演示映射
@@ -112,6 +121,7 @@ const demoComponents = {
   FormDesigner: FormDesignerDemo,
   BizJsonEditor: BizJsonEditorDemo,
   ProcessFlow: ProcessFlowDemo,
+  CustomTable: CustomTableDemo,
 };
 
 const viewComponent = component => {

@@ -21,6 +21,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@iconify/vue'],
   },
+  server: {
+    host: '0.0.0.0',
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
